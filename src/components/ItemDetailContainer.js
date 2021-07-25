@@ -17,24 +17,18 @@ export default function ItemDetailContainer() {
   const AddProduct = () => {
     if (count < stock) {
       moreCount(count + 1);
-
-      console.log("count desde metodo" + count);
       if (count + 1 > 0) {
         setStatusBoton(false);
-        console.log("activo boton " + count);
       }
     }
   };
   const RemoveProduct = () => {
     if (count == 1) {
       setStatusBoton(true);
-      
     }
 
     if (count > 0) {
       moreCount(count - 1);
-
-     
     }
   };
 
@@ -79,10 +73,10 @@ export default function ItemDetailContainer() {
             removeProduct={RemoveProduct}
           />
           <br />
-<Link to={"/cart"}>
-          <Button variant="primary" disabled={statusBoton}>
-            Terminar Compra
-          </Button>
+          <Link to={"/cart"}>
+            <Button variant="primary" disabled={statusBoton}>
+              Terminar Compra
+            </Button>
           </Link>
         </Card.Footer>
       </Card>
