@@ -1,6 +1,5 @@
 import { Button, Card } from "react-bootstrap";
 
-import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
 import React from "react";
 

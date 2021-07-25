@@ -23,7 +23,7 @@ export default function ItemDetailContainer() {
     }
   };
   const RemoveProduct = () => {
-    if (count == 1) {
+    if (count === 1) {
       setStatusBoton(true);
     }
 

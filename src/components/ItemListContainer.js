@@ -1,9 +1,9 @@
-import { Jumbotron } from "react-bootstrap";
-import ItemList from "./ItemList";
-import { useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-
 import { CardDeck, Spinner } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+
+import ItemList from "./ItemList";
+import { Jumbotron } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 export default function ItemListContainer(props) {
   const { id } = useParams();
@@ -14,7 +14,7 @@ export default function ItemListContainer(props) {
   let url = "https://productsrestservice.azurewebsites.net/api/product/";
 
   useEffect(() => {
-   
+    
     if (typeof id !== "undefined") {
       console.log(props);
       url = url + "category/" + id;
