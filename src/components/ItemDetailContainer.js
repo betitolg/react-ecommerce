@@ -37,6 +37,7 @@ export default function ItemDetailContainer() {
   const Comprar = (items, count) => {
     items.quantity = count;
 
+    
     addToCart(items, count);
   };
 
