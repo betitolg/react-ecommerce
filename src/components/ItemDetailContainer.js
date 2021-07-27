@@ -1,6 +1,7 @@
 import { Button, Card, Spinner } from "react-bootstrap";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
+import { CartContext } from "./CartContext/CartContext";
 import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -13,6 +14,7 @@ export default function ItemDetailContainer() {
   const [count, moreCount] = useState(0);
   const [stock, setStock] = useState(0);
   const [statusBoton, setStatusBoton] = useState(true);
+  const { addToCart, cart } = useContext(CartContext);
 
   const AddProduct = () => {
     if (count < stock) {
@@ -30,6 +32,12 @@ export default function ItemDetailContainer() {
     if (count > 0) {
       moreCount(count - 1);
     }
+  };
+
+  const Comprar = (items, count) => {
+    items.quantity = count;
+
+    addToCart(items, count);
   };
 
   useEffect(() => {
@@ -73,11 +81,15 @@ export default function ItemDetailContainer() {
             removeProduct={RemoveProduct}
           />
           <br />
-          <Link to={"/cart"}>
-            <Button variant="primary" disabled={statusBoton}>
-              Terminar Compra
-            </Button>
-          </Link>
+          {/* <Link to={"/cart"}> */}
+          <Button
+            variant="primary"
+            disabled={statusBoton}
+            onClick={() => Comprar(items, count)}
+          >
+            Comprar
+          </Button>
+          {/* </Link> */}
         </Card.Footer>
       </Card>
     );

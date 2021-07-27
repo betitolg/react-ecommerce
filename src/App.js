@@ -1,12 +1,16 @@
 import "./App.css";
+
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
+import Cart from "./components/Cart";
+import { CartProvider } from "./components/CartContext/CartContext";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
-import Cart from "./components/Cart";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
+    <CartProvider>
     <Router>
       <div className="container">
         <NavBar />
@@ -19,6 +23,7 @@ function App() {
       </Switch>
       </div>
     </Router>
+    </CartProvider>
   );
 }
 

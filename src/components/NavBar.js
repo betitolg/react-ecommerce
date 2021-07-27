@@ -37,8 +37,9 @@ export default function NavBar() {
             <NavDropdown.Item href="#">Categoria 4</NavDropdown.Item>
           </NavDropdown>
         </Nav>
-
+        <Link to="/cart">
         <CarWidget />
+        </Link>
       </Navbar.Collapse>
     </Navbar>
     
