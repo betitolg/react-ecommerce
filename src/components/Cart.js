@@ -58,6 +58,10 @@ if(cartCount>0){
   );}
   else{
 
-    return (<div>No se encuentran items en el carrito</div>)
+    return (<div>No se encuentran items en el carrito
+  <Link to={"/"}>Regresar y compra nuestros productos</Link>
+
+    </div>)
+    
   }
 }
