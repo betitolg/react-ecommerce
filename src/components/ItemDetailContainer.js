@@ -1,10 +1,10 @@
 import { Button, Card, Spinner } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
 
-import { Alert } from "react-bootstrap";
 import AlertItem from "../components/extras/AlertItem"
 import { CartContext } from "./CartContext/CartContext";
 import ItemCount from "./ItemCount";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 export default function ItemDetailContainer() {
@@ -17,6 +17,7 @@ export default function ItemDetailContainer() {
   const [statusBoton, setStatusBoton] = useState(true);
   const [statusAlert, setStatusAlert] = useState(false);
   const { addToCart, cart } = useContext(CartContext);
+const [statusBotonComprar, setstatusBotonComprar] = useState(false)
 
   const AddProduct = () => {
     if (count < stock) {
@@ -41,6 +42,7 @@ export default function ItemDetailContainer() {
 
     setStatusAlert(true);
     addToCart(items, count);
+    setstatusBotonComprar(true);
   };
 
   useEffect(() => {
@@ -90,8 +92,16 @@ export default function ItemDetailContainer() {
             disabled={statusBoton}
             onClick={() => Comprar(items, count)}
           >
-            Comprar
+            Agregar al Carrito
           </Button>
+          <br/>
+          <br/>
+          <Link to={'/cart'}>
+            
+<Button style={{display: statusBotonComprar ? 'block' : 'none' }}>
+  Ir al Carrito 
+  </Button>
+  </Link>
           {/* </Link> */}
         </Card.Footer>
 <AlertItem show={statusAlert} />

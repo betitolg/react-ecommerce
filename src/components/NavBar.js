@@ -27,14 +27,14 @@ export default function NavBar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
        
-          <Nav.Link href="#link">Nosotros</Nav.Link>
+          <Nav.Link >Nosotros</Nav.Link>
           <NavDropdown title="Categorias" id="basic-nav-dropdown">
           <Link to="/item/3">Detail</Link>
-            <NavDropdown.Item href="#">Categoria 1</NavDropdown.Item>
-            <NavDropdown.Item href="#">Categoria 2</NavDropdown.Item>
-            <NavDropdown.Item href="#">Categoria 3</NavDropdown.Item>
+            <NavDropdown.Item >Categoria 1</NavDropdown.Item>
+            <NavDropdown.Item >Categoria 2</NavDropdown.Item>
+            <NavDropdown.Item >Categoria 3</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#">Categoria 4</NavDropdown.Item>
+            <NavDropdown.Item >Categoria 4</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Link to="/cart">
