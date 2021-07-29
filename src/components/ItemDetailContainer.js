@@ -14,7 +14,7 @@ export default function ItemDetailContainer() {
   const { id } = useParams();
   const [count, moreCount] = useState(0);
   const [stock, setStock] = useState(0);
-  const [statusBoton, setStatusBoton] = useState(true);
+  const [statusBoton, setStatusBoton] = useState(false);
   const [statusAlert, setStatusAlert] = useState(false);
   const { addToCart, cart } = useContext(CartContext);
   const [statusBotonComprar, setstatusBotonComprar] = useState(false);
@@ -23,13 +23,13 @@ const [stateItemCount, setstateItemCount] = useState('itemcount')
     if (count < stock) {
       moreCount(count + 1);
       if (count + 1 > 0) {
-        setStatusBoton(false);
+        setStatusBoton(true);
       }
     }
   };
   const RemoveProduct = () => {
     if (count === 1) {
-      setStatusBoton(true);
+      setStatusBoton(false);
     }
 
     if (count > 0) {
@@ -44,7 +44,7 @@ const [stateItemCount, setstateItemCount] = useState('itemcount')
     addToCart(items, count);
     setstatusBotonComprar(true);
     setstateItemCount('itemcounthide');
-    setStatusBoton(true);
+    setStatusBoton(false);
   };
 
   useEffect(() => {
@@ -90,9 +90,9 @@ const [stateItemCount, setstateItemCount] = useState('itemcount')
           />
           <br />
           {/* <Link to={"/cart"}> */}
-          <Button
+          <Button style={{ display: statusBoton ? "block" : "none" }}
             variant="primary"
-            disabled={statusBoton}
+          
             onClick={() => Comprar(items, count)}
           >
             Agregar al Carrito
