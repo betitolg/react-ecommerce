@@ -101,7 +101,7 @@ const [stateItemCount, setstateItemCount] = useState('itemcount')
           <br />
           <Link to={"/cart"}>
             <Button style={{ display: statusBotonComprar ? "block" : "none" }}>
-              Terminar Comprar
+              Terminar Compra
             </Button>
           </Link>
           {/* </Link> */}

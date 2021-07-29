@@ -8,6 +8,8 @@ function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [cartTotalAmount, setCartTotalAmount] = useState(0);
 
+
+
   const addToCart = (item, count) => {
     if (cartItems.find((x) => x.id === item.id)) {
       var product = cartItems.find((x) => x.id === item.id);
@@ -20,24 +22,39 @@ function CartProvider({ children }) {
 
       setCartItems(copy);
       setCartCount((prev) => prev + count);
+      setCartTotalAmount((prev) => prev  + product.subtotal);
     } else {
       item.subtotal = item.quantity * item.price;
-      console.log(item);
+     
 
       setCartItems([...cartItems, { ...item, count }]);
       setCartCount((prev) => prev + count);
+      setCartTotalAmount((prev) => prev  + item.subtotal);
     }
   };
 
-  const RemoveToCart = (item) => {};
+  function remove(...toRemove){
+    toRemove.forEach(item => {
+       var index = cartItems.indexOf(item);
+       if(index != -1){
+        cartItems.splice(index, 1);
+       }
+    })
+ }
+
+  const RemoveToCart = (item) => {
+    var product = cartItems.find((x) => x.id === item);
+  
+    
+remove(product)
+setCartItems(cartItems);
+setCartCount((prev) => prev - product.quantity);
+setCartTotalAmount((prev) => prev  - product.subtotal);
+
+  };
 
   const TotalAmountCart = () => {
-    let suma = 0;
-    cartItems.map(function (item) {
-      suma = suma + item.subtotal;
-    });
-
-    setCartTotalAmount(suma);
+   
   };
 
   return (
@@ -48,6 +65,7 @@ function CartProvider({ children }) {
         addToCart,
         cartTotalAmount,
         TotalAmountCart,
+        RemoveToCart
       }}
     >
       {children}
