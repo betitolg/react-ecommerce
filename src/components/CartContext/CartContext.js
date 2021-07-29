@@ -44,18 +44,16 @@ function CartProvider({ children }) {
 
   const RemoveToCart = (item) => {
     var product = cartItems.find((x) => x.id === item);
-  
+    setCartTotalAmount((prev) => prev  - product.subtotal);
+
     
 remove(product)
 setCartItems(cartItems);
 setCartCount((prev) => prev - product.quantity);
-setCartTotalAmount((prev) => prev  - product.subtotal);
 
   };
 
-  const TotalAmountCart = () => {
-   
-  };
+  
 
   return (
     <CartContext.Provider
@@ -64,7 +62,6 @@ setCartTotalAmount((prev) => prev  - product.subtotal);
         cartItems,
         addToCart,
         cartTotalAmount,
-        TotalAmountCart,
         RemoveToCart
       }}
     >
