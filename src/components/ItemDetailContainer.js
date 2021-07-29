@@ -1,7 +1,7 @@
 import { Button, Card, Spinner } from "react-bootstrap";
 import React, { useContext, useEffect, useState } from "react";
 
-import AlertItem from "../components/extras/AlertItem"
+import AlertItem from "../components/extras/AlertItem";
 import { CartContext } from "./CartContext/CartContext";
 import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
@@ -17,8 +17,8 @@ export default function ItemDetailContainer() {
   const [statusBoton, setStatusBoton] = useState(true);
   const [statusAlert, setStatusAlert] = useState(false);
   const { addToCart, cart } = useContext(CartContext);
-const [statusBotonComprar, setstatusBotonComprar] = useState(false)
-
+  const [statusBotonComprar, setstatusBotonComprar] = useState(false);
+const [stateItemCount, setstateItemCount] = useState('itemcount')
   const AddProduct = () => {
     if (count < stock) {
       moreCount(count + 1);
@@ -43,6 +43,8 @@ const [statusBotonComprar, setstatusBotonComprar] = useState(false)
     setStatusAlert(true);
     addToCart(items, count);
     setstatusBotonComprar(true);
+    setstateItemCount('itemcounthide');
+    setStatusBoton(true);
   };
 
   useEffect(() => {
@@ -84,6 +86,7 @@ const [statusBotonComprar, setstatusBotonComprar] = useState(false)
             initial={0}
             addProduct={AddProduct}
             removeProduct={RemoveProduct}
+            vStatus = {stateItemCount}
           />
           <br />
           {/* <Link to={"/cart"}> */}
@@ -94,17 +97,16 @@ const [statusBotonComprar, setstatusBotonComprar] = useState(false)
           >
             Agregar al Carrito
           </Button>
-          <br/>
-          <br/>
-          <Link to={'/cart'}>
-            
-<Button style={{display: statusBotonComprar ? 'block' : 'none' }}>
-  Ir al Carrito 
-  </Button>
-  </Link>
+          <br />
+          <br />
+          <Link to={"/cart"}>
+            <Button style={{ display: statusBotonComprar ? "block" : "none" }}>
+              Terminar Comprar
+            </Button>
+          </Link>
           {/* </Link> */}
         </Card.Footer>
-<AlertItem show={statusAlert} />
+        <AlertItem show={statusAlert} />
       </Card>
     );
   }

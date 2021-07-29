@@ -1,3 +1,5 @@
+import './ItemCount.css'
+
 import { Button } from "react-bootstrap";
 import React  from "react";
 
@@ -5,7 +7,7 @@ export default function ItemCount(props) {
 
 
   return (
-    <div>
+    <div className={props.vStatus}>
       
       <h6 style={{ color: "red" }}>Stock disponible: {props.stock}</h6>
 
