@@ -1,5 +1,6 @@
 import "./App.css";
 
+import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Cart from "./components/Cart";
@@ -9,16 +10,7 @@ import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar";
 import {getFireStore} from "../src/components/firebase";
 
-import React, { useEffect } from 'react'
-
 function App() {
-
-useEffect(() => {
-  const fireStore = getFireStore();
-
-  console.log(fireStore.collection('productos').get());
-  
-})
 
   return (
     <CartProvider>

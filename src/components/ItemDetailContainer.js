@@ -5,6 +5,7 @@ import AlertItem from "../components/extras/AlertItem";
 import { CartContext } from "./CartContext/CartContext";
 import ItemCount from "./ItemCount";
 import { Link } from "react-router-dom";
+import { getFireStore } from "./firebase";
 import { useParams } from "react-router-dom";
 
 export default function ItemDetailContainer() {
@@ -18,7 +19,9 @@ export default function ItemDetailContainer() {
   const [statusAlert, setStatusAlert] = useState(false);
   const { addToCart, cart } = useContext(CartContext);
   const [statusBotonComprar, setstatusBotonComprar] = useState(false);
-const [stateItemCount, setstateItemCount] = useState('itemcount')
+  const [stateItemCount, setstateItemCount] = useState("itemcount");
+
+
   const AddProduct = () => {
     if (count < stock) {
       moreCount(count + 1);
@@ -43,26 +46,37 @@ const [stateItemCount, setstateItemCount] = useState('itemcount')
     setStatusAlert(true);
     addToCart(items, count);
     setstatusBotonComprar(true);
-    setstateItemCount('itemcounthide');
+    setstateItemCount("itemcounthide");
     setStatusBoton(false);
   };
 
   useEffect(() => {
-    console.log(id);
-    fetch("https://productsrestservice.azurewebsites.net/api/product/" + id)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-          setStock(result.stock);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
+
+    const firestore = getFireStore();
+
+    const itemCollection = firestore.collection("productos");
+
+    const item = itemCollection.doc(id);
+    
+    item
+      .get()
+      .then((doc) => {
+        if (!doc.exists) {
+          console.log("no existe");
+          return;
         }
-      );
-  }, [id]);
+        setItems({id:doc.id,...doc.data()});
+        console.log(doc.data());
+
+        setStock(doc.data().stock);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoaded(true);
+      });
+  },[id]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -86,13 +100,14 @@ const [stateItemCount, setstateItemCount] = useState('itemcount')
             initial={0}
             addProduct={AddProduct}
             removeProduct={RemoveProduct}
-            vStatus = {stateItemCount}
+            vStatus={stateItemCount}
           />
+          {/* <ToastItem show={statusAlert} /> */}
           <br />
           {/* <Link to={"/cart"}> */}
-          <Button style={{ display: statusBoton ? "block" : "none" }}
+          <Button
+            style={{ display: statusBoton ? "block" : "none" }}
             variant="primary"
-          
             onClick={() => Comprar(items, count)}
           >
             Agregar al Carrito

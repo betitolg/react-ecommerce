@@ -22,8 +22,8 @@ export default function Cart(params) {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Producto</th>
+              <th>Id Producto</th>
+              <th>Nombre </th>
               <th>Cantidad</th>
               <th>Precio Unitario</th>
               <th>SubTotal</th>

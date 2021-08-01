@@ -3,45 +3,66 @@ import React, { useEffect, useState } from "react";
 
 import ItemList from "./ItemList";
 import { Jumbotron } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import { getFireStore } from "./firebase";
+import { useParams } from "react-router-dom";
 
 export default function ItemListContainer(props) {
   const { id } = useParams();
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-
-  let url = "https://productsrestservice.azurewebsites.net/api/product/";
+  const [items, setItems] = useState([{}]);
+  const [itemsid, setId] = useState([{}]);
 
   useEffect(() => {
-    
-const firestore = getFireStore();
+    const firestore = getFireStore();
 
-const collection = firestore.collection('productos');
+    const itemCollection = firestore.collection("productos");
 
-console.log(collection);
     if (typeof id !== "undefined") {
-      console.log(props);
-      url = url + "category/" + id;
-    }
+      itemCollection
+        .where("category", "==", id)
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size === 0) {
+            console.log("Sin resultados");
+          }
 
-
-
-
-    fetch(url)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-        (error) => {
-          setIsLoaded(true);
+          let ListaProductosCopy = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+console.log("busqueda por categoria")
+          setItems(ListaProductosCopy);
+        })
+        .catch((error) => {
           setError(error);
-        }
-      );
-  }, [url]);
+        })
+        .finally(() => {
+          setIsLoaded(true);
+        });
+    } else {
+      itemCollection
+        .get()
+        .then((querySnapshot) => {
+          if (querySnapshot.size === 0) {
+            console.log("Sin resultados");
+          }
+
+          let ListaProductosCopy = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+
+          setItems(ListaProductosCopy);
+        })
+        .catch((error) => {
+          setError(error);
+        })
+        .finally(() => {
+          setIsLoaded(true);
+        });
+    }
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
