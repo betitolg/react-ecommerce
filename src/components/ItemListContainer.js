@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import { Jumbotron } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { getFireStore } from "./firebase";
 
 export default function ItemListContainer(props) {
   const { id } = useParams();
@@ -15,10 +16,18 @@ export default function ItemListContainer(props) {
 
   useEffect(() => {
     
+const firestore = getFireStore();
+
+const collection = firestore.collection('productos');
+
+console.log(collection);
     if (typeof id !== "undefined") {
       console.log(props);
       url = url + "category/" + id;
     }
+
+
+
 
     fetch(url)
       .then((res) => res.json())
