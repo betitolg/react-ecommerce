@@ -35,7 +35,7 @@ function CartProvider({ children }) {
 
   function remove(...toRemove){
     toRemove.forEach(item => {
-       var index = cartItems.indexOf(item);
+       let index = cartItems.indexOf(item);
        if(index != -1){
         cartItems.splice(index, 1);
        }
@@ -43,7 +43,7 @@ function CartProvider({ children }) {
  }
 
   const RemoveToCart = (item) => {
-    var product = cartItems.find((x) => x.id === item);
+    let product = cartItems.find((x) => x.id === item);
     setCartTotalAmount((prev) => prev  - product.subtotal);
 
     
