@@ -6,12 +6,35 @@ import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 
 export default function Cart(params) {
-  const { cartCount, cartItems, RemoveToCart ,cartTotalAmount} = useContext(CartContext);
+  const { cartCount, cartItems, RemoveToCart ,cartTotalAmount,CartClean} = useContext(CartContext);
 
   const DeleteFromCar = (item) => {
     
     RemoveToCart(item);
   };
+  
+  const DeleteAllFromCar =()=>{
+
+    CartClean();
+
+  }
+
+const crearOrden =()=>{
+
+
+const nueva_Orden ={
+buyer:{
+  name:"Horacio",
+  phone: "5434343",
+  email : "d.lopezg@outlook.com"
+},
+ordenes: cartItems,
+date: new Date(),
+total: cartTotalAmount
+}
+
+}
+
 
   if (cartCount > 0) {
     return (
@@ -72,9 +95,16 @@ export default function Cart(params) {
           </tr>
           </tfoot>
         </Table>
-        
-       
-      
+        <br>
+        </br>
+        <Button  variant='danger' onClick={DeleteAllFromCar} > Limpiar Carrito </Button>
+        <br></br>
+        <br></br>
+        <Link to="/checkout">
+       <Button > Procesar Carrito  </Button>
+       </Link>
+      <br></br>
+      <br></br>
         <Link to={"/"}>Regresar a la página principal</Link>
       </div>
     );

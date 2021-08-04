@@ -53,7 +53,13 @@ setCartCount((prev) => prev - product.quantity);
 
   };
 
-  
+  const CartClean = () =>{
+
+    setCartCount(0);
+    setCartItems([]);
+   setCartTotalAmount(0);
+
+  }
 
   return (
     <CartContext.Provider
@@ -62,7 +68,8 @@ setCartCount((prev) => prev - product.quantity);
         cartItems,
         addToCart,
         cartTotalAmount,
-        RemoveToCart
+        RemoveToCart,
+        CartClean
       }}
     >
       {children}
