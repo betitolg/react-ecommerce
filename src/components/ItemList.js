@@ -5,11 +5,6 @@ import Item from "./Item";
 
 export default function ItemList(props) {
 
-useEffect(() => {
-
-
-}, [])
-
   return (
     <CardDeck>
      {props.ItemList.map((item) => (
