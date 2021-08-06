@@ -36,7 +36,7 @@ function CartProvider({ children }) {
   function remove(...toRemove){
     toRemove.forEach(item => {
        let index = cartItems.indexOf(item);
-       if(index != -1){
+       if(index !== -1){
         cartItems.splice(index, 1);
        }
     })

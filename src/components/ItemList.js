@@ -1,7 +1,6 @@
-import React ,{useEffect, useState}from "react";
-
 import { CardDeck } from "react-bootstrap";
 import Item from "./Item";
+import React from "react";
 
 export default function ItemList(props) {
 

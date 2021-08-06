@@ -1,11 +1,11 @@
 import { Button, Jumbotron } from "react-bootstrap";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { CartContext } from "./CartContext/CartContext";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 
-export default function Cart(params) {
+export default function Cart() {
   const { cartCount, cartItems, RemoveToCart ,cartTotalAmount,CartClean} = useContext(CartContext);
 
   const DeleteFromCar = (item) => {
@@ -19,21 +19,6 @@ export default function Cart(params) {
 
   }
 
-const crearOrden =()=>{
-
-
-const nueva_Orden ={
-buyer:{
-  name:"Horacio",
-  phone: "5434343",
-  email : "d.lopezg@outlook.com"
-},
-ordenes: cartItems,
-date: new Date(),
-total: cartTotalAmount
-}
-
-}
 
 
   if (cartCount > 0) {
@@ -56,7 +41,7 @@ total: cartTotalAmount
           </thead>
           <tbody>
             {cartItems.map((item) => (
-              <tr>
+              <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.quantity}</td>

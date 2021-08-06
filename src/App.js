@@ -1,6 +1,5 @@
 import "./App.css";
 
-import React, { useEffect } from 'react'
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Cart from "./components/Cart";
@@ -9,13 +8,14 @@ import Checkout from "../src/components/Checkout"
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
 import NavBar from "./components/NavBar";
-import {getFireStore} from "../src/components/firebase";
+import React from 'react'
 
 function App() {
 
   return (
-    <CartProvider>
+  
     <Router>
+        <CartProvider>
       <div className="container">
         <NavBar />
         <br />
@@ -27,8 +27,9 @@ function App() {
         <Route exact path="/checkout" component={Checkout} />
       </Switch>
       </div>
+      </CartProvider>
     </Router>
-    </CartProvider>
+   
   );
 }
 

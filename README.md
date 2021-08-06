@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Ecommerce React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecto creado por Daniel Alberto Lópzz Grández
 
 ## Available Scripts
 

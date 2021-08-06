@@ -11,7 +11,6 @@ export default function ItemListContainer(props) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([{}]);
-  const [itemsid, setId] = useState([{}]);
 
   useEffect(() => {
     const firestore = getFireStore();
@@ -62,7 +61,7 @@ console.log("busqueda por categoria")
           setIsLoaded(true);
         });
     }
-  }, []);
+  }, [id]);
 
   if (error) {
     return <div>Error: {error.message}</div>;

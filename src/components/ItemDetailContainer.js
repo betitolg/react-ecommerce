@@ -17,7 +17,7 @@ export default function ItemDetailContainer() {
   const [stock, setStock] = useState(0);
   const [statusBoton, setStatusBoton] = useState(false);
   const [statusAlert, setStatusAlert] = useState(false);
-  const { addToCart, cart } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
   const [statusBotonComprar, setstatusBotonComprar] = useState(false);
   const [stateItemCount, setstateItemCount] = useState("itemcount");
 
@@ -66,7 +66,7 @@ export default function ItemDetailContainer() {
           return;
         }
         setItems({id:doc.id,...doc.data()});
-        console.log(doc.data());
+        
 
         setStock(doc.data().stock);
       })
@@ -102,9 +102,9 @@ export default function ItemDetailContainer() {
             removeProduct={RemoveProduct}
             vStatus={stateItemCount}
           />
-          {/* <ToastItem show={statusAlert} /> */}
+       
           <br />
-          {/* <Link to={"/cart"}> */}
+       
           <Button
             style={{ display: statusBoton ? "block" : "none" }}
             variant="primary"

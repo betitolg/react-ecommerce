@@ -1,12 +1,12 @@
 import { Badge, Button, Form, Table } from "react-bootstrap";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { CartContext } from "./CartContext/CartContext";
 import { Link } from "react-router-dom";
 import { getFireStore } from "./firebase";
 
 export default function Checkout() {
-  const { cartCount, cartItems, RemoveToCart, cartTotalAmount, CartClean } =
+  const { cartCount, cartItems, cartTotalAmount, CartClean } =
     useContext(CartContext);
 
 
@@ -61,11 +61,11 @@ const EmailChangeHandler =(evt)=>{
 }
 
 
-  if (statusCompra == 0) {
+  if (statusCompra === 0) {
     return (
       <div>necesitas agregar productos a tu carrito para hacer el checkout</div>
     );
-  } else if (statusCompra == 1) {
+  } else if (statusCompra === 1) {
     return (
       <div>
         <div>
@@ -82,7 +82,7 @@ const EmailChangeHandler =(evt)=>{
             </thead>
             <tbody>
               {cartItems.map((item) => (
-                <tr>
+                <tr key={item.id}>
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.quantity}</td>

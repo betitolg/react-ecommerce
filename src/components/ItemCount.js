@@ -15,7 +15,7 @@ export default function ItemCount(props) {
       <Button variant="dark" onClick={props.removeProduct}>
         -
       </Button>
-      <input type="text" value={props.count} style={{ width: "50px" }} />
+      <input type="text" value={props.count} style={{ width: "50px" }}  readOnly/>
       <Button variant="dark" onClick={props.addProduct}>
         +
       </Button>
