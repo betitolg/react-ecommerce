@@ -26,11 +26,10 @@ export default function NavBar() {
         <Nav className="mr-auto">
       
           <NavDropdown title="Categorias" id="basic-nav-dropdown">
-          <Link to={'/category/1'}>
-        <NavDropdown.Item>Categoria 1</NavDropdown.Item>
-        </Link>
-        <NavDropdown.Item>Categoria 2</NavDropdown.Item>
-        <NavDropdown.Item>Categoria 3</NavDropdown.Item>
+         
+        <NavDropdown.Item> <Link to={'/category/1'}>Categoria 1 </Link></NavDropdown.Item>
+        <NavDropdown.Item> <Link to={'/category/2'}>Categoria 2 </Link></NavDropdown.Item>
+        <NavDropdown.Item> <Link to={'/category/3'}>Categoria 3 </Link></NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Link to="/cart">

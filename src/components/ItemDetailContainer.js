@@ -20,7 +20,7 @@ export default function ItemDetailContainer() {
   const { addToCart } = useContext(CartContext);
   const [statusBotonComprar, setstatusBotonComprar] = useState(false);
   const [stateItemCount, setstateItemCount] = useState("itemcount");
-
+  const [exist, setExist] = useState(true);
 
   const AddProduct = () => {
     if (count < stock) {
@@ -58,13 +58,16 @@ export default function ItemDetailContainer() {
 
     const item = itemCollection.doc(id);
     
+
+
     item
       .get()
       .then((doc) => {
         if (!doc.exists) {
-          console.log("no existe");
+          setExist(false);
           return;
         }
+        setExist(true);
         setItems({id:doc.id,...doc.data()});
         
 
@@ -78,14 +81,24 @@ export default function ItemDetailContainer() {
       });
   },[id]);
 
+if(!exist){
+
+  return (<div>El producto no existe   <Link to={"/"}>Regresar a la página principal</Link></div> )
+}
+
+
   if (error) {
     return <div>Error: {error.message}</div>;
   } else if (!isLoaded) {
     return <Spinner animation="grow" variant="dark" />;
-  } else {
+  } 
+ 
+  else {
     return (
+
+     exist &&
       <Card className="text-center">
-        <Card.Header>Consulta Producto : {items.name}</Card.Header>
+        <Card.Header>Consulta Producto : {items.name} </Card.Header>
         <Card.Body>
           <Card.Img variant="top" src={items.img} />
           <Card.Title>{items.name}</Card.Title>
@@ -124,5 +137,6 @@ export default function ItemDetailContainer() {
         <AlertItem show={statusAlert} />
       </Card>
     );
+
   }
 }

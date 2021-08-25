@@ -20,10 +20,18 @@ export default function Checkout() {
   const [enteredName, setEnteredName] = useState("");
   const [enteredPhone, setEnteredPhone] = useState("");
   const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredEmailRepeat, setEnteredEmailRepeat] = useState("");
 const [idOrder,setOrderId] = useState("");
-
+const [error, seterror] = useState(false)
   const ProcesarComprar = (evt) => {
     evt.preventDefault();
+
+
+if(enteredEmail!==enteredEmailRepeat){
+
+  seterror(true);
+  return;
+}
 
     const firestore = getFireStore();
 
@@ -59,7 +67,9 @@ const PhoneChangeHandler =(evt)=>{
 const EmailChangeHandler =(evt)=>{
   setEnteredEmail(evt.target.value);
 }
-
+const EmailRepeatChangeHandler =(evt)=>{
+  setEnteredEmailRepeat(evt.target.value);
+}
 
   if (statusCompra === 0) {
     return (
@@ -118,19 +128,24 @@ const EmailChangeHandler =(evt)=>{
         <Form id="datosPersonales" style={{ border: 2 }} onSubmit={ProcesarComprar}>
           <Form.Group className="mb-3" controlId="formName">
             <Form.Label>Nombres </Form.Label>
-            <Form.Control type="text" placeholder="Ingresa tu nombre" onChange={NameChangeHandler}/>
+            <Form.Control  feedback="hola" required type="text" placeholder="Ingresa tu nombre" onChange={NameChangeHandler}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formTelefono">
             <Form.Label>Teléfono </Form.Label>
-            <Form.Control type="phone" placeholder="Ingresar teléfono" onChange={PhoneChangeHandler}/>
+            <Form.Control required type="number" placeholder="Ingresar teléfono" onChange={PhoneChangeHandler}/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Correo electrónico </Form.Label>
-            <Form.Control type="email" placeholder="Enter email" onChange={EmailChangeHandler} />
+            <Form.Control required type="email" placeholder="Enter email" onChange={EmailChangeHandler} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>Ingrese de nuevo el Correo electrónico </Form.Label>
+            <Form.Control  required type="email" placeholder="Ingresa nuevamante el  email" onChange={EmailRepeatChangeHandler} />
           </Form.Group>
           <Button variant="primary" type="submit">
             Cerrar compra
           </Button>
+           {(error ?<Form.Label>Los correos electronicos deben ser iguales </Form.Label>:"")}
         </Form>
       </div>
     );
